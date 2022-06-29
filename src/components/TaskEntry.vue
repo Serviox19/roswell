@@ -3,7 +3,7 @@
     <div class="task-entry__wrapper">
       <div class="task-entry__watch">
         <div class="started-wrap">
-          Started: <span class="started">{{ start }}</span>
+          Started at: <span class="started">{{ start }}</span>
         </div>
         <div class="started-wrap">
           Timer: <span id="timer-div"></span>
@@ -39,7 +39,8 @@
         duration: '',
         timerStarted: null,
         error: null,
-        interval: {}
+        interval: {},
+        counter: 0
       }
     },
     computed: {},
@@ -52,12 +53,14 @@
         this.start = moment(start).format('hh:mm:ss');
 
         this.interval = window.setInterval(() => {
-          document.querySelector('#timer-div').innerHTML = moment().format('hh:mm:ss');
+          document.querySelector('#timer-div').innerHTML = moment().hour(0).minute(0).second(this.counter++).format('HH : mm : ss');
         }, 1000)
       },
       stopTimer() {
         if (this.start === '') return false;
-        clearInterval(this.interval)
+        clearInterval(this.interval);
+        document.querySelector('#timer-div').innerHTML = '';
+
         var end = new moment();
         this.end = end;
 
@@ -105,5 +108,28 @@
     flex-direction: column;
     padding: 23px 25px;
     background-color: #F6F6F6;
+  }
+
+  .task-entry__watch {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    padding-right: 2rem;
+
+    .started-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      font-size: 1rem;
+      line-height: 1.25;
+      font-weight: 700;
+
+      span {
+        display: inline;
+        font-weight: 400;
+        min-height: 20px;
+      }
+    }
   }
 </style>
