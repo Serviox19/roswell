@@ -10,7 +10,7 @@
           :key="index"
           :title="task.title"
           :time="task.time"
-          @removeTask="removeTask(task)">
+          @remove="removeTask(task)">
         </task-list-item>
       </div>
     </div>
@@ -33,11 +33,13 @@
     mounted() {},
     computed: {
       ...mapState({
-        tasks: (state) => state.tasks.all
+        tasks: (state) => state.tasks.tasks
       }),
     },
     methods: {
-      //removeTask(task) {}
+      removeTask(task) {
+        this.$store.dispatch('tasks/removeTask', task);
+      }
     }
   }
 </script>

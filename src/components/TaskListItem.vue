@@ -8,7 +8,7 @@
         {{ time }}
       </p>
     </div>
-    <button class="task-item__btn">
+    <button class="task-item__btn" @click="remove">
       <img src="/icon-close.svg" />
     </button>
   </div>
@@ -32,8 +32,8 @@
     },
     computed: {},
     methods: {
-      removeTask(task) {
-        this.$emit('removeTask', task)
+      remove() {
+        this.$emit('remove')
       }
     }
   }
