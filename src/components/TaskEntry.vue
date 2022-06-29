@@ -9,6 +9,7 @@
           Timer: <span id="timer-div"></span>
         </div>
       </div>
+      <label>Task Description:</label>
       <input
         type="text"
         placeholder="Enter task details"
@@ -16,8 +17,8 @@
         @change="title = $event.target.value"
       />
       <div class="task-entry__actions">
-        <button @click="startTimer">Start</button>
-        <button @click="stopTimer">Stop</button>
+        <button class="task-entry__start" @click="startTimer">Start</button>
+        <button class="task-entry__stop" @click="stopTimer">Stop</button>
       </div>
     </div>
   </div>
@@ -38,7 +39,7 @@
         duration: '',
         timerStarted: null,
         error: null,
-        interval: ''
+        interval: {}
       }
     },
     computed: {},
@@ -96,4 +97,13 @@
   }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .task-entry {}
+
+  .task-entry__wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 23px 25px;
+    background-color: #F6F6F6;
+  }
+</style>

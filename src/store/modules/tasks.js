@@ -3,12 +3,16 @@ const state = {
     {
       'id': 1,
       'title': 'New HP Feature',
-      'time': '12 minutes'
+      'start': '12 minutes',
+      'end': '12 minutes',
+      'duration': '2 minutes'
     },
     {
       'id': 2,
       'title': 'New PDP Design',
-      'time': '16 minutes'
+      'start': '2 minutes',
+      'end': '16 minutes',
+      'duration': '2 minutes'
     }
   ]
 };

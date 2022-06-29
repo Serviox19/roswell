@@ -1,11 +1,27 @@
 <template>
   <div class="task-item">
-    <div class="task-item__main">
-      <h3 class="task-item__title">
+    <div class="task-item__block">
+      <label>Description</label>
+      <p class="task-item__block-text">
         {{ task.title }}
-      </h3>
-      <p class="task-item__timestamp">
-        {{ task.time }}
+      </p>
+    </div>
+    <div class="task-item__block">
+      <label>Start Time</label>
+      <p class="task-item__block-text">
+        {{ task.start }}
+      </p>
+    </div>
+    <div class="task-item__block">
+      <label>End Time</label>
+      <p class="task-item__block-text">
+        {{ task.end }}
+      </p>
+    </div>
+    <div class="task-item__block">
+      <label>Duration</label>
+      <p class="task-item__block-text">
+        {{ task.duration }}
       </p>
     </div>
     <button class="task-item__btn" @click="remove">
@@ -37,67 +53,82 @@
 
 <style lang="scss" scoped>
   .task-item {
+    position: relative;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 1rem;
-    border: solid 1px #000;
-    border-radius: 4px;
-    background: #F1F1F1;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-bottom: solid 1px #C4C4C4;
+    padding: 15px 0;
 
-    &:not(:last-of-type) {
-      margin-bottom: 1rem;
+    @media only screen and (min-width: 767px) {
+      padding-right: 4rem;
+    }
+
+    &:last-child {
+      border-bottom: none;
     }
   }
 
-  .task-item__main {
+  .task-item__block {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: flex-start;
 
-    @media only screen and (min-width: 768px) {
-      flex-direction: row;
-      justify-content: space-around;
-      align-items: center;
-      flex: 0 1 60%;
+    @media only screen and (min-width: 767px) {
+      justify-content: flex-start;
+      height: min-content;
+    }
+
+    &:nth-child(1) {
+      flex: 0 1 100%;
+      margin-bottom: 15px;
+
+      @media only screen and (min-width: 767px) {
+        flex: 0 1 30%;
+        margin-bottom: 0;
+      }
+    }
+
+    label {
+      font-size: 0.8rem;
+      line-height: 1rem;
+      margin-bottom: 0.4rem;
+      font-weight: 700;
+
+      @media only screen and (min-width: 767px) {
+        display: none;
+      }
+    }
+
+    p {
+      font-size: 0.8rem;
+      line-height: 1rem;
+      margin-bottom: 0;
+      font-weight: 400;
     }
   }
 
-  .task-item__title {
-    font-size: 1rem;
-    line-height: 1.5;
-    letter-spacing: 0.5px;
-    font-weight: 700;
-    margin: 0 0 0.8rem;
-
-    @media only screen and (min-width: 768px) {
-      font-size: 1.5rem;
-      margin: 0;
-    }
-  }
-
-  .task-item__timestamp {
+  .task-item__block-text {
     font-size: 0.8rem;
-    line-height: 1.25;
+    line-height: 1rem;
     letter-spacing: 0.5px;
-    font-weight: 500;
+    font-weight: 400;
     margin: 0;
-
-    @media only screen and (min-width: 768px) {
-      font-size: 1.2rem;
-    }
   }
 
   .task-item__btn {
+    position: absolute;
+    right: -0.25rem;
+    top: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0;
     border: none;
     background: transparent;
-    width: 40px;
-    height: 40px;
+    width: 30px;
+    height: 30px;
     border-radius: 100%;
     cursor: pointer;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
@@ -111,6 +142,11 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+    }
+
+    @media only screen and (min-width: 767px) {
+      top: 50%;
+      transform: translate(0%, -50%);
     }
   }
 </style>
