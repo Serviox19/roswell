@@ -1,25 +1,56 @@
 <template>
   <div class="task-list">
     <div class="task-list__wrapper">
-      <div class="task-list__wrapper" v-if="!tasks && !tasks.length"></div>
+      <div class="task-list__empty" v-if="!tasks && !tasks.length">
+        <h2 class="No entries, please add some!"></h2>
+      </div>
+      <div class="task-list__listing" v-else>
+        <task-list-item
+          v-for="(task, index) in tasks"
+          :key="index"
+          :title="task.title"
+          :time="task.time"
+          @removeTask="removeTask(task)">
+        </task-list-item>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex';
+  import TaskListItem from './TaskListItem.vue';
+
   export default {
     name: 'TaskList',
-    components: {},
+    components: {
+      TaskListItem,
+    },
     props: {},
     data() {
-      return {
-        tasks: []
-      }
+      return {}
     },
     mounted() {},
-    computed: {},
-    methods: {}
+    computed: {
+      ...mapState({
+        tasks: (state) => state.tasks.all
+      }),
+    },
+    methods: {
+      //removeTask(task) {}
+    }
   }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+  .task-list {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-top: 60px;
+  }
+
+  .task-list__wrapper {
+    padding: 1rem;
+  }
+</style>
