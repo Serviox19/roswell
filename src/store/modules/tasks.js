@@ -1,20 +1,5 @@
 const state = {
-  tasks: [
-    {
-      'id': 1,
-      'title': 'New HP Feature',
-      'start': '12 minutes',
-      'end': '12 minutes',
-      'duration': '2 minutes'
-    },
-    {
-      'id': 2,
-      'title': 'New PDP Design',
-      'start': '2 minutes',
-      'end': '16 minutes',
-      'duration': '2 minutes'
-    }
-  ]
+  tasks: []
 };
 
 const mutations = {

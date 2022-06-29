@@ -1,6 +1,6 @@
 <template>
   <header>
-    <h2>Task Entry Project</h2>
+    <h2>Task Entry Test</h2>
   </header>
 </template>
 
