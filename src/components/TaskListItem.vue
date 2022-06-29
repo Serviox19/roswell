@@ -2,10 +2,10 @@
   <div class="task-item">
     <div class="task-item__main">
       <h3 class="task-item__title">
-        {{ title }}
+        {{ task.title }}
       </h3>
       <p class="task-item__timestamp">
-        {{ time }}
+        {{ task.time }}
       </p>
     </div>
     <button class="task-item__btn" @click="remove">
@@ -18,14 +18,10 @@
   export default {
     name: 'TaskListItem',
     props: {
-      title: {
-        type: String,
+      task: {
+        type: Object,
         required: true
       },
-      time: {
-        type: String,
-        required: true
-      }
     },
     data() {
       return {}

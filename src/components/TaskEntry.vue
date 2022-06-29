@@ -1,7 +1,20 @@
 <template>
   <div class="task-entry">
     <div class="task-entry__wrapper">
-      <input type="text" placeholder="Enter task details" />
+      <div class="task-entry__watch">
+        <div class="started-wrap">
+          Started: <span class="started">{{ start }}</span>
+        </div>
+        <div class="started-wrap">
+          Timer: <span id="timer-div"></span>
+        </div>
+      </div>
+      <input
+        type="text"
+        placeholder="Enter task details"
+        :value="title"
+        @change="title = $event.target.value"
+      />
       <div class="task-entry__actions">
         <button @click="startTimer">Start</button>
         <button @click="stopTimer">Stop</button>
@@ -11,18 +24,74 @@
 </template>
 
 <script>
+  import moment from 'moment';
+
   export default {
     name: "TaskEntry",
     components: {},
     props: {},
     data() {
-      return {}
+      return {
+        title: '',
+        start: '',
+        end: '',
+        duration: '',
+        timerStarted: null,
+        error: null,
+        interval: ''
+      }
     },
     computed: {},
     methods: {
-      startTimer() {},
-      stopTimer() {},
-      clearData() {}
+      startTimer() {
+        if (this.title === '') return false;
+
+        this.timerStarted = true;
+        var start = new moment();
+        this.start = moment(start).format('hh:mm:ss');
+
+        this.interval = window.setInterval(() => {
+          document.querySelector('#timer-div').innerHTML = moment().format('hh:mm:ss');
+        }, 1000)
+      },
+      stopTimer() {
+        if (this.start === '') return false;
+        clearInterval(this.interval)
+        var end = new moment();
+        this.end = end;
+
+        var a = this.start;
+        var b = this.end;
+        var duration = b.diff(a, 'seconds');
+        console.log(duration);
+
+        this.duration = duration;
+
+        if (this.start !== '' && this.end !== '' && this.duration !== '') {
+          this.addNewTask()
+        } else {
+          this.error = 'Something is wrong, please try again!'
+        }
+      },
+      async addNewTask() {
+        console.log(this.title);
+        let data = {
+          'title': this.title,
+          'start': this.start,
+          'end': moment(this.end).format('hh:mm:ss'),
+          'duration': moment.utc(this.duration * 1000).format("hh:mm:ss")
+        }
+        await this.$store.dispatch('tasks/addTask', data);
+        await this.clearData();
+      },
+      clearData() {
+        this.title = '',
+        this.start = '',
+        this.end = '',
+        this.duration = '',
+        this.timerStarted = null,
+        this.error = null
+      }
     }
   }
 </script>

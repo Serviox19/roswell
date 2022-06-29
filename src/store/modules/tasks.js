@@ -10,16 +10,12 @@ const state = {
       'title': 'New PDP Design',
       'time': '16 minutes'
     }
-  ],
-  newTask: {}
+  ]
 };
 
 const mutations = {
-  GET_TASK(state, task) {
-    state.newTask = task
-  },
-  ADD_TASK(state) {
-    state.tasks.push(state.newTask)
+  ADD_TASK(state, task) {
+    state.tasks.push(task)
   },
   REMOVE_TASK(state, task) {
     var tasks = state.tasks
@@ -34,8 +30,8 @@ const actions = {
   getTask({ commit }, task) {
     commit('GET_TASK', task)
   },
-  addTask({ commit }) {
-    commit('ADD_TASK')
+  addTask({ commit }, task) {
+    commit('ADD_TASK', task)
   },
   removeTask({ commit }, task) {
     commit('REMOVE_TASK', task)

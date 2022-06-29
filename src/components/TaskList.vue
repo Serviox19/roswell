@@ -6,11 +6,10 @@
       </div>
       <div class="task-list__listing" v-else>
         <task-list-item
-          v-for="(task, index) in tasks"
+          v-for="(item, index) in tasks"
           :key="index"
-          :title="task.title"
-          :time="task.time"
-          @remove="removeTask(task)">
+          :task="item"
+          @remove="removeTask(item)">
         </task-list-item>
       </div>
     </div>
